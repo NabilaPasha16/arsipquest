@@ -28,12 +28,12 @@ class AboutSection extends StatelessWidget {
                     children: const [
                       SectionTitle(
                         title: 'Tentang Produk',
-                        subtitle: 'Game sejarah bernapas modern vintage',
-                        description: 'ARSIP QUEST adalah board game edukatif yang menggabungkan strategi, eksplorasi, dan teknologi AR untuk mengenalkan sejarah Indonesia secara menyenangkan kepada anak-anak dan keluarga.',
+                        subtitle: 'Sejarah Indonesia hadir sebagai petualangan interaktif',
+                        description: 'ARSIP QUEST menghadirkan pengalaman board game edukatif yang memadukan strategi, eksplorasi, dan teknologi Augmented Reality untuk membawa pemain menjelajahi jejak sejarah Indonesia secara imersif dan menyenangkan.',
                       ),
                       SizedBox(height: 20),
                       Text(
-                        'Permainan ini dirancang untuk menciptakan pengalaman belajar aktif dengan peta lokasi bersejarah, kartu arsip rahasia, dan tantangan interaktif yang membuat setiap putaran menjadi petualangan edukatif.',
+                        'Setiap permainan mengajak pemain menelusuri situs bersejarah Nusantara, mengungkap arsip tersembunyi, dan menghadapi tantangan strategi yang membuat proses belajar terasa hidup, visual, dan penuh eksplorasi',
                         style: TextStyle(height: 1.7),
                       ),
                     ],
@@ -53,9 +53,9 @@ class AboutSection extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          Text('Menemukan arsip', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20)),
+                          Text('Menghidupkan Jejak Sejarah', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20)),
                           SizedBox(height: 12),
-                          Text('Selami narasi sejarah Indonesia dengan elemen budaya, strategi permainan, dan fitur AR yang menghadirkan rekaman arsip digital di setiap kartu.', textAlign: TextAlign.left),
+                          Text('Rasakan perpaduan board game, elemen budaya Indonesia, dan teknologi AR yang menghadirkan pengalaman belajar sejarah secara modern dan berkesan.', textAlign: TextAlign.left),
                         ],
                       ),
                     ),
@@ -83,27 +83,27 @@ class FeatureSection extends StatelessWidget {
     FeatureItem(
       icon: Icons.visibility_rounded,
       title: 'Berbasis Augmented Reality',
-      description: 'Aktifkan pengalaman AR untuk melihat arsip hidup.',
+      description: 'Teknologi AR menghadirkan pengalaman belajar yang lebih visual dan imersif.',
     ),
     FeatureItem(
-      icon: Icons.landscape_rounded,
+      icon: Icons.explore_rounded,
       title: 'Situs Bersejarah Indonesia',
-      description: 'Kenali destinasi budaya dari Aceh hingga Papua.',
+      description: 'Jelajahi berbagai situs budaya dan sejarah Indonesia dalam satu permainan.',
     ),
     FeatureItem(
       icon: Icons.groups_rounded,
-      title: 'Latihan Strategi & Kerja Sama',
-      description: 'Bangun rencana tim dan raih kemenangan bersama.',
+      title: 'Kolaborasi dan Strategi',
+      description: 'Bangun kerja sama tim sambil memecahkan tantangan sejarah yang seru.',
     ),
     FeatureItem(
       icon: Icons.person_rounded,
-      title: '2–4 Pemain',
-      description: 'Cocok untuk keluarga, kelas, dan komunitas edukasi.',
+      title: 'Seru untuk Semua Usia',
+      description: 'Dirancang untuk keluarga, pelajar, komunitas, dan aktivitas edukatif.',
     ),
     FeatureItem(
-      icon: Icons.child_care_rounded,
-      title: 'Usia 10+',
-      description: 'Dirancang agar aman dan menarik untuk usia sekolah.',
+      icon: Icons.workspace_premium_rounded,
+      title: 'Desain Premium',
+      description: 'Visual vintage modern dengan komponen permainan yang elegan dan eksklusif.',
     ),
   ];
 
@@ -118,8 +118,8 @@ class FeatureSection extends StatelessWidget {
           children: [
             const SectionTitle(
               title: 'Keunggulan Produk',
-              subtitle: 'Mengapa ARSIP QUEST',
-              description: 'Temukan kelebihan permainan yang memadukan histori, teknologi AR, dan pengalaman tabletop premium untuk audiens modern.',
+              subtitle: 'Mengapa ARSIP QUEST berbeda?',
+              description: 'Perpaduan edukasi, strategi permainan, dan teknologi modern menjadikan ARSIP QUEST sebagai pengalaman belajar sejarah yang lebih hidup, kolaboratif, dan menyenangkan.',
             ),
             const SizedBox(height: 32),
             Wrap(
