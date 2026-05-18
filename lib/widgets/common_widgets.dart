@@ -34,7 +34,9 @@ class SectionTitle extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 720),
           child: Text(
             description,
-            style: textTheme.bodyLarge?.copyWith(color: AppColors.darkBrown.withValues(alpha: 0.88)),
+            style: textTheme.bodyLarge?.copyWith(
+              color: AppColors.darkBrown.withValues(alpha: 0.88),
+            ),
           ),
         ),
       ],
@@ -46,7 +48,11 @@ class AnimatedSection extends StatelessWidget {
   final Widget child;
   final bool visible;
 
-  const AnimatedSection({super.key, required this.child, required this.visible});
+  const AnimatedSection({
+    super.key,
+    required this.child,
+    required this.visible,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +96,10 @@ class FeatureCard extends StatelessWidget {
             offset: const Offset(0, 12),
           ),
         ],
-        border: Border.all(color: AppColors.gold.withValues(alpha: 0.16), width: 1),
+        border: Border.all(
+          color: AppColors.gold.withValues(alpha: 0.16),
+          width: 1,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,12 +116,16 @@ class FeatureCard extends StatelessWidget {
           const SizedBox(height: 18),
           Text(
             title,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.darkBrown),
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(color: AppColors.darkBrown),
           ),
           const SizedBox(height: 10),
           Text(
             subtitle,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.navy.withValues(alpha: 0.85)),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: AppColors.navy.withValues(alpha: 0.85),
+            ),
           ),
         ],
       ),
@@ -156,42 +169,48 @@ class PriceCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.darkBrown),
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(color: AppColors.darkBrown),
           ),
           const SizedBox(height: 12),
           Text(
             price,
-            style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.accentRed, fontSize: 38),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: AppColors.accentRed,
+              fontSize: 38,
+            ),
           ),
           const SizedBox(height: 16),
-          ...items.map((item) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 6),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 8,
-                      height: 8,
-                      margin: const EdgeInsets.only(top: 8, right: 12),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.navy,
+          ...items.map(
+            (item) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 8,
+                    height: 8,
+                    margin: const EdgeInsets.only(top: 8, right: 12),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.navy,
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      item,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppColors.navy.withValues(alpha: 0.85),
                       ),
                     ),
-                    Expanded(
-                      child: Text(
-                        item,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.navy.withValues(alpha: 0.85)),
-                      ),
-                    ),
-                  ],
-                ),
-              )),
-          const SizedBox(height: 22),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text(ctaLabel),
+                  ),
+                ],
+              ),
+            ),
           ),
+          const SizedBox(height: 22),
+          ElevatedButton(onPressed: () {}, child: Text(ctaLabel)),
         ],
       ),
     );
@@ -202,11 +221,7 @@ class FaqTile extends StatelessWidget {
   final String question;
   final String answer;
 
-  const FaqTile({
-    super.key,
-    required this.question,
-    required this.answer,
-  });
+  const FaqTile({super.key, required this.question, required this.answer});
 
   @override
   Widget build(BuildContext context) {
@@ -219,15 +234,72 @@ class FaqTile extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Text(
           question,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w700, color: AppColors.darkBrown),
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.w700,
+            color: AppColors.darkBrown,
+          ),
         ),
-        childrenPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        childrenPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 12,
+        ),
         children: [
           Text(
             answer,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.navy.withValues(alpha: 0.9)),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: AppColors.navy.withValues(alpha: 0.9),
+            ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class HoverFloatCard extends StatefulWidget {
+  final Widget child;
+  const HoverFloatCard({super.key, required this.child});
+
+  @override
+  State<HoverFloatCard> createState() => _HoverFloatCardState();
+}
+
+class _HoverFloatCardState extends State<HoverFloatCard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _offsetY;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    );
+    _offsetY = Tween<double>(
+      begin: 0,
+      end: -10,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => _controller.forward(),
+      onExit: (_) => _controller.reverse(),
+      child: AnimatedBuilder(
+        animation: _offsetY,
+        builder: (context, child) => Transform.translate(
+          offset: Offset(0, _offsetY.value),
+          child: child,
+        ),
+        child: widget.child,
       ),
     );
   }

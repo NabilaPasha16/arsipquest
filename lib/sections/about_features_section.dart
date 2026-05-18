@@ -28,8 +28,10 @@ class AboutSection extends StatelessWidget {
                     children: const [
                       SectionTitle(
                         title: 'Tentang Produk',
-                        subtitle: 'Sejarah Indonesia hadir sebagai petualangan interaktif',
-                        description: 'ARSIP QUEST menghadirkan pengalaman board game edukatif yang memadukan strategi, eksplorasi, dan teknologi Augmented Reality untuk membawa pemain menjelajahi jejak sejarah Indonesia secara imersif dan menyenangkan.',
+                        subtitle:
+                            'Sejarah Indonesia hadir sebagai petualangan interaktif',
+                        description:
+                            'ARSIP QUEST menghadirkan pengalaman board game edukatif yang memadukan strategi, eksplorasi, dan teknologi Augmented Reality untuk membawa pemain menjelajahi jejak sejarah Indonesia secara imersif dan menyenangkan.',
                       ),
                       SizedBox(height: 20),
                       Text(
@@ -48,14 +50,25 @@ class AboutSection extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: AppColors.softStone,
                         borderRadius: BorderRadius.circular(30),
-                        border: Border.all(color: AppColors.gold.withValues(alpha: 0.18)),
+                        border: Border.all(
+                          color: AppColors.gold.withValues(alpha: 0.18),
+                        ),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          Text('Menghidupkan Jejak Sejarah', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20)),
+                          Text(
+                            'Menghidupkan Jejak Sejarah',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 20,
+                            ),
+                          ),
                           SizedBox(height: 12),
-                          Text('Rasakan perpaduan board game, elemen budaya Indonesia, dan teknologi AR yang menghadirkan pengalaman belajar sejarah secara modern dan berkesan.', textAlign: TextAlign.left),
+                          Text(
+                            'Rasakan perpaduan board game, elemen budaya Indonesia, dan teknologi AR yang menghadirkan pengalaman belajar sejarah secara modern dan berkesan.',
+                            textAlign: TextAlign.left,
+                          ),
                         ],
                       ),
                     ),
@@ -78,32 +91,38 @@ class FeatureSection extends StatelessWidget {
     FeatureItem(
       icon: Icons.school_rounded,
       title: 'Edukatif dan Interaktif',
-      description: 'Memperkuat pengetahuan sejarah melalui permainan kolaboratif.',
+      description:
+          'Memperkuat pengetahuan sejarah melalui permainan kolaboratif.',
     ),
     FeatureItem(
       icon: Icons.visibility_rounded,
       title: 'Berbasis Augmented Reality',
-      description: 'Teknologi AR menghadirkan pengalaman belajar yang lebih visual dan imersif.',
+      description:
+          'Teknologi AR menghadirkan pengalaman belajar yang lebih visual dan imersif.',
     ),
     FeatureItem(
       icon: Icons.explore_rounded,
       title: 'Situs Bersejarah Indonesia',
-      description: 'Jelajahi berbagai situs budaya dan sejarah Indonesia dalam satu permainan.',
+      description:
+          'Jelajahi berbagai situs budaya dan sejarah Indonesia dalam satu permainan.',
     ),
     FeatureItem(
       icon: Icons.groups_rounded,
       title: 'Kolaborasi dan Strategi',
-      description: 'Bangun kerja sama tim sambil memecahkan tantangan sejarah yang seru.',
+      description:
+          'Bangun kerja sama tim sambil memecahkan tantangan sejarah yang seru.',
     ),
     FeatureItem(
       icon: Icons.person_rounded,
       title: 'Seru untuk Semua Usia',
-      description: 'Dirancang untuk keluarga, pelajar, komunitas, dan aktivitas edukatif.',
+      description:
+          'Dirancang untuk keluarga, pelajar, komunitas, dan aktivitas edukatif.',
     ),
     FeatureItem(
       icon: Icons.workspace_premium_rounded,
       title: 'Desain Premium',
-      description: 'Visual vintage modern dengan komponen permainan yang elegan dan eksklusif.',
+      description:
+          'Visual vintage modern dengan komponen permainan yang elegan dan eksklusif.',
     ),
   ];
 
@@ -119,7 +138,8 @@ class FeatureSection extends StatelessWidget {
             const SectionTitle(
               title: 'Keunggulan Produk',
               subtitle: 'Mengapa ARSIP QUEST berbeda?',
-              description: 'Perpaduan edukasi, strategi permainan, dan teknologi modern menjadikan ARSIP QUEST sebagai pengalaman belajar sejarah yang lebih hidup, kolaboratif, dan menyenangkan.',
+              description:
+                  'Perpaduan edukasi, strategi permainan, dan teknologi modern menjadikan ARSIP QUEST sebagai pengalaman belajar sejarah yang lebih hidup, kolaboratif, dan menyenangkan.',
             ),
             const SizedBox(height: 32),
             Wrap(
@@ -129,10 +149,12 @@ class FeatureSection extends StatelessWidget {
                   .map(
                     (feature) => SizedBox(
                       width: 340,
-                      child: FeatureCard(
-                        icon: feature.icon,
-                        title: feature.title,
-                        subtitle: feature.description,
+                      child: HoverFloatCard(
+                        child: FeatureCard(
+                          icon: feature.icon,
+                          title: feature.title,
+                          subtitle: feature.description,
+                        ),
                       ),
                     ),
                   )

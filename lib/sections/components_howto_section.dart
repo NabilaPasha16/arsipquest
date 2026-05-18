@@ -13,7 +13,10 @@ class ComponentsSection extends StatelessWidget {
     ComponentItem(title: 'Papan permainan', icon: Icons.map_rounded),
     ComponentItem(title: 'Kartu Situs Sejarah', icon: Icons.book_rounded),
     ComponentItem(title: 'Kartu Arsip Rahasia', icon: Icons.lock_rounded),
-    ComponentItem(title: 'Kartu Kejadian Sejarah', icon: Icons.history_edu_rounded),
+    ComponentItem(
+      title: 'Kartu Kejadian Sejarah',
+      icon: Icons.history_edu_rounded,
+    ),
     ComponentItem(title: 'Lembar Literasi', icon: Icons.description_rounded),
     ComponentItem(title: 'QR AR Cards', icon: Icons.qr_code_2_rounded),
   ];
@@ -30,7 +33,8 @@ class ComponentsSection extends StatelessWidget {
             const SectionTitle(
               title: 'Komponen Permainan',
               subtitle: 'Setiap elemen dirancang untuk cerita',
-              description: 'Simak komponen lengkap ARSIP QUEST yang membantu pemain memahami sejarah lewat permainan visual, taktik, dan AR.',
+              description:
+                  'Simak komponen lengkap ARSIP QUEST yang membantu pemain memahami sejarah lewat permainan visual, taktik, dan AR.',
             ),
             const SizedBox(height: 30),
             Wrap(
@@ -38,32 +42,44 @@ class ComponentsSection extends StatelessWidget {
               runSpacing: 18,
               children: components
                   .map(
-                    (item) => Container(
-                      width: 260,
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: AppColors.softStone,
-                        borderRadius: BorderRadius.circular(26),
-                        border: Border.all(color: AppColors.gold.withValues(alpha: 0.16)),
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: AppColors.navy,
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                            child: Icon(item.icon, color: AppColors.parchment, size: 24),
+                    (item) => HoverFloatCard(
+                      child: Container(
+                        width: 260,
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: AppColors.softStone,
+                          borderRadius: BorderRadius.circular(26),
+                          border: Border.all(
+                            color: AppColors.gold.withValues(alpha: 0.16),
                           ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: Text(
-                              item.title,
-                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: AppColors.darkBrown, fontWeight: FontWeight.w700),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: AppColors.navy,
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              child: Icon(
+                                item.icon,
+                                color: AppColors.parchment,
+                                size: 24,
+                              ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Text(
+                                item.title,
+                                style: Theme.of(context).textTheme.bodyLarge
+                                    ?.copyWith(
+                                      color: AppColors.darkBrown,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   )
@@ -90,6 +106,15 @@ class HowToPlaySection extends StatelessWidget {
     StepItem(step: '6', label: 'Raih kemenangan'),
   ];
 
+  static const stepImages = [
+    'assets/pilih_pion.png',
+    'assets/jelajahi_situs_sejarah.png',
+    'assets/kumpulkan_aset.png',
+    'assets/temukan_arsip_rahasia.png',
+    'assets/gunakan_ar.png',
+    'assets/raih_kemenangan.png',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return AnimatedSection(
@@ -102,39 +127,66 @@ class HowToPlaySection extends StatelessWidget {
             const SectionTitle(
               title: 'Cara Bermain',
               subtitle: 'Langkah demi langkah',
-              description: 'Ikuti proses permainan ARSIP QUEST agar pengalaman pembelajaran tetap seru, intuitif, dan mudah dimengerti oleh semua usia.',
+              description:
+                  'Ikuti proses permainan ARSIP QUEST agar pengalaman pembelajaran tetap seru, intuitif, dan mudah dimengerti oleh semua usia.',
             ),
             const SizedBox(height: 30),
             Wrap(
               spacing: 22,
               runSpacing: 22,
-              children: steps
-                  .map(
-                    (item) => Container(
-                      width: 220,
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: AppColors.softStone,
-                        borderRadius: BorderRadius.circular(26),
-                        boxShadow: [
-                          BoxShadow(color: AppColors.shadow, blurRadius: 20, offset: const Offset(0, 12)),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CircleAvatar(
-                            radius: 24,
-                            backgroundColor: AppColors.gold,
-                            child: Text(item.step, style: const TextStyle(color: AppColors.parchment, fontWeight: FontWeight.w700)),
-                          ),
-                          const SizedBox(height: 18),
-                          Text(item.label, style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.darkBrown)),
-                        ],
-                      ),
+              children: List.generate(steps.length, (index) {
+                final item = steps[index];
+                final imagePath = stepImages[index];
+                return HoverFloatCard(
+                  child: Container(
+                    width: 220,
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: AppColors.softStone,
+                      borderRadius: BorderRadius.circular(26),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.shadow,
+                          blurRadius: 20,
+                          offset: const Offset(0, 12),
+                        ),
+                      ],
                     ),
-                  )
-                  .toList(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image.asset(
+                            imagePath,
+                            height: 130,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        CircleAvatar(
+                          radius: 24,
+                          backgroundColor: AppColors.gold,
+                          child: Text(
+                            item.step,
+                            style: const TextStyle(
+                              color: AppColors.parchment,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          item.label,
+                          style: Theme.of(context).textTheme.titleLarge
+                              ?.copyWith(color: AppColors.darkBrown),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
             ),
           ],
         ),
