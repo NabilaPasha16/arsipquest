@@ -1,3 +1,4 @@
+import 'package:arsipquest/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'core/theme/app_theme.dart';
@@ -24,7 +25,6 @@ class ArsipQuestApp extends StatelessWidget {
       scrollBehavior: const MaterialScrollBehavior().copyWith(scrollbars: true),
       theme: AppTheme.light,
       home: const LandingPage(),
-
     );
   }
 }
@@ -123,11 +123,11 @@ class _LandingPageState extends State<LandingPage> {
       body: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Color(0xFFF8F1E4), Color(0xFFF4E8D5)],
+                colors: [AppColors.lightGold, AppColors.gold.withOpacity(0.08)],
               ),
             ),
           ),
@@ -145,27 +145,39 @@ class _LandingPageState extends State<LandingPage> {
                 ),
                 Container(
                   key: _sectionKeys['Tentang'],
-                  child: AboutSection(visible: _visibleSections['Tentang'] ?? false),
+                  child: AboutSection(
+                    visible: _visibleSections['Tentang'] ?? false,
+                  ),
                 ),
                 Container(
                   key: _sectionKeys['Keunggulan'],
-                  child: FeatureSection(visible: _visibleSections['Keunggulan'] ?? false),
+                  child: FeatureSection(
+                    visible: _visibleSections['Keunggulan'] ?? false,
+                  ),
                 ),
                 Container(
                   key: _sectionKeys['Komponen'],
-                  child: ComponentsSection(visible: _visibleSections['Komponen'] ?? false),
+                  child: ComponentsSection(
+                    visible: _visibleSections['Komponen'] ?? false,
+                  ),
                 ),
                 Container(
                   key: _sectionKeys['Cara Bermain'],
-                  child: HowToPlaySection(visible: _visibleSections['Cara Bermain'] ?? false),
+                  child: HowToPlaySection(
+                    visible: _visibleSections['Cara Bermain'] ?? false,
+                  ),
                 ),
                 Container(
                   key: _sectionKeys['Galeri'],
-                  child: GallerySection(visible: _visibleSections['Galeri'] ?? false),
+                  child: GallerySection(
+                    visible: _visibleSections['Galeri'] ?? false,
+                  ),
                 ),
                 Container(
                   key: _sectionKeys['Harga'],
-                  child: PricingSection(visible: _visibleSections['Harga'] ?? false),
+                  child: PricingSection(
+                    visible: _visibleSections['Harga'] ?? false,
+                  ),
                 ),
                 Container(
                   key: _sectionKeys['FAQ'],
@@ -174,17 +186,19 @@ class _LandingPageState extends State<LandingPage> {
                 Container(
                   key: _sectionKeys['Kontak'],
                   child: const Column(
-                    children: [
-                      ContactSection(visible: true),
-                      FooterSection(),
-                    ],
+                    children: [ContactSection(visible: true), FooterSection()],
                   ),
                 ),
                 const SizedBox(height: 40),
               ],
             ),
           ),
-          Positioned(top: 0, left: 0, right: 0, child: NavbarSection(elevated: _navElevated, onItemTap: _scrollTo)),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: NavbarSection(elevated: _navElevated, onItemTap: _scrollTo),
+          ),
         ],
       ),
     );

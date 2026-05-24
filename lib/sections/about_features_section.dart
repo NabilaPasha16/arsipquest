@@ -18,61 +18,78 @@ class AboutSection extends StatelessWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final isMobile = constraints.maxWidth < 880;
-            return Row(
+
+            // Menggunakan Flex agar bisa berubah dari Row (Desktop) ke Column (Mobile)
+            return Flex(
+              direction: isMobile ? Axis.vertical : Axis.horizontal,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  flex: 4,
+                  flex: isMobile
+                      ? 0
+                      : 4, // Jangan gunakan expanded jika mobile agar tidak error height
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      SectionTitle(
+                    children: [
+                      const SectionTitle(
                         title: 'Tentang Produk',
                         subtitle:
                             'Sejarah Indonesia hadir sebagai petualangan interaktif',
                         description:
                             'ARSIP QUEST menghadirkan pengalaman board game edukatif yang memadukan strategi, eksplorasi, dan teknologi Augmented Reality untuk membawa pemain menjelajahi jejak sejarah Indonesia secara imersif dan menyenangkan.',
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
+                      // Perbaikan: Text tidak boleh membungkus SizedBox
                       Text(
-                        'Setiap permainan mengajak pemain menelusuri situs bersejarah Nusantara, mengungkap arsip tersembunyi, dan menghadapi tantangan strategi yang membuat proses belajar terasa hidup, visual, dan penuh eksplorasi',
-                        style: TextStyle(height: 1.7),
+                        'Setiap permainan mengajak pemain menelusuri situs bersejarah Nusantara, mengungkap arsip tersembunyi, dan menghadapi tantangan strategi yang membuat proses belajar terasa hidup, visual, dan penuh eksplorasi.',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: AppColors.darkBrown.withOpacity(0.8),
+                        ),
                       ),
                     ],
                   ),
                 ),
-                if (!isMobile) const SizedBox(width: 32),
                 if (!isMobile)
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      padding: const EdgeInsets.all(24),
-                      decoration: BoxDecoration(
-                        color: AppColors.softStone,
-                        borderRadius: BorderRadius.circular(30),
-                        border: Border.all(
-                          color: AppColors.gold.withValues(alpha: 0.18),
-                        ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Menghidupkan Jejak Sejarah',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 20,
-                            ),
-                          ),
-                          SizedBox(height: 12),
-                          Text(
-                            'Rasakan perpaduan board game, elemen budaya Indonesia, dan teknologi AR yang menghadirkan pengalaman belajar sejarah secara modern dan berkesan.',
-                            textAlign: TextAlign.left,
-                          ),
-                        ],
+                  const SizedBox(width: 32)
+                else
+                  const SizedBox(height: 32),
+
+                // Bagian Kartu "Menghidupkan Jejak Sejarah"
+                Expanded(
+                  flex: isMobile ? 0 : 3,
+                  child: Container(
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      color: AppColors.navy,
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(
+                        color: AppColors.gold.withOpacity(0.18),
                       ),
                     ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Menghidupkan Jejak Sejarah',
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.parchment,
+                              ),
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          'Rasakan perpaduan board game, elemen budaya Indonesia, dan teknologi AR yang menghadirkan pengalaman belajar sejarah secara modern dan berkesan.',
+                          textAlign: TextAlign.left,
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: AppColors.parchment.withOpacity(0.9),
+                              ),
+                        ),
+                      ],
+                    ),
                   ),
+                ),
               ],
             );
           },
@@ -87,7 +104,7 @@ class FeatureSection extends StatelessWidget {
 
   const FeatureSection({super.key, required this.visible});
 
-  static const features = [
+  static const List<FeatureItem> features = [
     FeatureItem(
       icon: Icons.school_rounded,
       title: 'Edukatif dan Interaktif',
@@ -142,23 +159,34 @@ class FeatureSection extends StatelessWidget {
                   'Perpaduan edukasi, strategi permainan, dan teknologi modern menjadikan ARSIP QUEST sebagai pengalaman belajar sejarah yang lebih hidup, kolaboratif, dan menyenangkan.',
             ),
             const SizedBox(height: 32),
-            Wrap(
-              spacing: 24,
-              runSpacing: 24,
-              children: features
-                  .map(
-                    (feature) => SizedBox(
-                      width: 340,
-                      child: HoverFloatCard(
-                        child: FeatureCard(
-                          icon: feature.icon,
-                          title: feature.title,
-                          subtitle: feature.description,
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final isMobile = constraints.maxWidth < 880;
+                // Perhitungan lebar kartu yang lebih aman untuk responsive
+                final cardWidth = isMobile
+                    ? constraints.maxWidth
+                    : (constraints.maxWidth - 48) /
+                          2.2; // Menampilkan hampir 3 kolom di desktop
+
+                return Wrap(
+                  spacing: 24,
+                  runSpacing: 24,
+                  children: features
+                      .map(
+                        (feature) => SizedBox(
+                          width: cardWidth > 340 ? 340 : cardWidth,
+                          child: HoverFloatCard(
+                            child: FeatureCard(
+                              icon: feature.icon,
+                              title: feature.title,
+                              subtitle: feature.description,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  )
-                  .toList(),
+                      )
+                      .toList(),
+                );
+              },
             ),
           ],
         ),

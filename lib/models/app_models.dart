@@ -16,29 +16,25 @@ class ComponentItem {
   final String title;
   final IconData icon;
 
-  const ComponentItem({
-    required this.title,
-    required this.icon,
-  });
+  const ComponentItem({required this.title, required this.icon});
 }
 
 class StepItem {
   final String step;
   final String label;
 
-  const StepItem({
-    required this.step,
-    required this.label,
-  });
+  const StepItem({required this.step, required this.label});
 }
 
 class GalleryItem {
   final String label;
   final Color color;
+  final String imagePath;
 
   const GalleryItem({
     required this.label,
     required this.color,
+    required this.imagePath,
   });
 }
 
@@ -70,8 +66,5 @@ class FaqItem {
   final String question;
   final String answer;
 
-  const FaqItem({
-    required this.question,
-    required this.answer,
-  });
+  const FaqItem({required this.question, required this.answer});
 }

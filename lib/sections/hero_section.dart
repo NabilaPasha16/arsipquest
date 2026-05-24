@@ -1,3 +1,5 @@
+import 'dart:math';
+import 'dart:ui'; // Penting: Untuk ImageFilter
 import 'package:flutter/material.dart';
 
 import '../core/constants/app_colors.dart';
@@ -16,150 +18,266 @@ class HeroSection extends StatelessWidget {
       child: Container(
         constraints: const BoxConstraints(minHeight: 700),
         padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 40),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final isMobile = constraints.maxWidth < 900;
-            return Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  flex: isMobile ? 0 : 6,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: AppColors.accentRed.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(18),
-                        ),
-                        child: const Text(
-                          'Board Game Edukasi • AR • Sejarah Indonesia',
-                          style: TextStyle(color: AppColors.accentRed, fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        'ARSIP QUEST',
-                        style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                              color: AppColors.navy,
-                              letterSpacing: 1.2,
-                            ),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'The Living Archive',
-                        style: Theme.of(context).textTheme.displayMedium?.copyWith(color: AppColors.accentRed),
-                      ),
-                      const SizedBox(height: 24),
-                      Text(
-                        'Sejarah bukan hafalan, tapi petualangan! Gabungkan strategi, eksplorasi, dan AR untuk mengenal situs bersejarah Indonesia dengan cara yang mengesankan.',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      const SizedBox(height: 30),
-                      Wrap(
-                        spacing: 16,
-                        runSpacing: 16,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () => onCtaTap('Kontak'),
-                            child: const Text('Mainkan Sekarang'),
-                          ),
-                          OutlinedButton(
-                            onPressed: () => onCtaTap('Harga'),
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: AppColors.darkBrown,
-                              side: const BorderSide(color: AppColors.darkBrown),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-                              padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 16),
-                            ),
-                            child: const Text('Lihat Produk'),
-                          ),
-                        ],
-                      ),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              AppColors.richBronzeGold,
+              AppColors.antiqueGold,
+              AppColors.gold,
+            ],
+          ),
+        ),
+        child: Stack(
+          children: [
+            // Overlay gradient halus untuk kedalaman
+            Positioned.fill(
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      AppColors.navy.withOpacity(0.04),
+                      Colors.transparent,
                     ],
                   ),
                 ),
-                if (!isMobile) const SizedBox(width: 20),
-                Expanded(
-                  flex: 5,
-                  child: Center(
-                    child: IntrinsicHeight(
-                      child: Stack(
-                        alignment: Alignment.center,
+              ),
+            ),
+
+            // --- Ornamen Dekoratif (Background) ---
+            Positioned(
+              left: -40,
+              top: 80,
+              child: Container(
+                width: 220,
+                height: 220,
+                decoration: BoxDecoration(
+                  color: AppColors.lightGold.withOpacity(0.24),
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
+            Positioned(
+              right: -30,
+              bottom: 60,
+              child: Container(
+                width: 160,
+                height: 160,
+                decoration: BoxDecoration(
+                  color: AppColors.antiqueGold.withOpacity(0.22),
+                  borderRadius: BorderRadius.circular(80),
+                ),
+              ),
+            ),
+
+            // Badge Petualangan (Muncul di Desktop/Tablet)
+            Positioned(
+              left: 32,
+              bottom: 36,
+              child: LayoutBuilder(
+                builder: (context, c) => c.maxWidth < 600
+                    ? const SizedBox.shrink()
+                    : Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.lightGold.withOpacity(0.95),
+                          borderRadius: BorderRadius.circular(28),
+                          border: Border.all(
+                            color: AppColors.gold.withOpacity(0.3),
+                          ),
+                        ),
+                        child: const Text(
+                          'Petualangan Sejarah • Bermain, Menjelajah, Mengungkap',
+                          style: TextStyle(
+                            color: AppColors.darkBrown,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+              ),
+            ),
+
+            // --- Konten Utama ---
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final isMobile = constraints.maxWidth < 900;
+                final imageWidth = min(
+                  520.0,
+                  constraints.maxWidth * (isMobile ? 0.8 : 0.48),
+                );
+                final imageHeight = imageWidth * 0.82;
+
+                return Flex(
+                  direction: isMobile ? Axis.vertical : Axis.horizontal,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Sisi Kiri: Teks & CTA
+                    Expanded(
+                      flex: isMobile ? 0 : 6,
+                      child: Column(
+                        crossAxisAlignment: isMobile
+                            ? CrossAxisAlignment.center
+                            : CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Positioned(
-                            left: 40,
-                            top: 60,
-                            child: _DecorativeCard(
-                              label: 'AR Card',
-                              icon: Icons.qr_code_2_rounded,
-                              color: AppColors.gold.withValues(alpha: 0.15),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 14,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.accentRed.withOpacity(0.16),
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            child: const Text(
+                              'Board Game Edukasi • AR • Sejarah Indonesia',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: AppColors.parchment,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
-                          Positioned(
-                            right: 0,
-                            bottom: 50,
-                            child: _DecorativeCard(
-                              label: 'Kartu Sejarah',
-                              icon: Icons.auto_stories_rounded,
-                              color: AppColors.accentRed.withValues(alpha: 0.14),
-                            ),
-                          ),
-                          CircleAvatar(
-                            radius: 135,
-                            backgroundColor: AppColors.softStone,
-                            child: Container(
-                              width: 250,
-                              height: 320,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(28),
-                                gradient: const LinearGradient(
-                                  colors: [AppColors.navy, AppColors.darkBrown],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
+                          const SizedBox(height: 20),
+                          Text(
+                            'ARSIP QUEST',
+                            textAlign: isMobile
+                                ? TextAlign.center
+                                : TextAlign.start,
+                            style: Theme.of(context).textTheme.displayLarge
+                                ?.copyWith(
+                                  color: AppColors.parchment,
+                                  letterSpacing: 1.2,
+                                  fontSize: isMobile ? 48 : null,
                                 ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.shadow,
-                                    blurRadius: 40,
-                                    offset: const Offset(0, 20),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'The Living Archive',
+                            textAlign: isMobile
+                                ? TextAlign.center
+                                : TextAlign.start,
+                            style: Theme.of(context).textTheme.displayMedium
+                                ?.copyWith(
+                                  color: AppColors.parchment,
+                                  fontSize: isMobile ? 24 : null,
+                                ),
+                          ),
+                          const SizedBox(height: 24),
+                          Text(
+                            'Sejarah bukan hafalan, tapi petualangan! Gabungkan strategi, eksplorasi, dan AR untuk mengenal situs bersejarah Indonesia dengan cara yang mengesankan.',
+                            textAlign: isMobile
+                                ? TextAlign.center
+                                : TextAlign.start,
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(
+                                  color: AppColors.parchment.withOpacity(0.92),
+                                ),
+                          ),
+                          const SizedBox(height: 30),
+                          Wrap(
+                            spacing: 16,
+                            runSpacing: 16,
+                            alignment: isMobile
+                                ? WrapAlignment.center
+                                : WrapAlignment.start,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () => onCtaTap('Kontak'),
+                                child: const Text('Mainkan Sekarang'),
+                              ),
+                              OutlinedButton(
+                                onPressed: () => onCtaTap('Harga'),
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: AppColors.parchment,
+                                  backgroundColor: AppColors.bistre.withOpacity(
+                                    0.18,
                                   ),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(22),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
-                                    Text(
-                                      'Mockup Produk',
-                                      style: TextStyle(
-                                        color: AppColors.parchment,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 18,
-                                      ),
+                                  side: BorderSide(
+                                    color: AppColors.parchment.withOpacity(
+                                      0.65,
                                     ),
-                                    SizedBox(height: 12),
-                                    Text(
-                                      'Papan permainan, kartu, uang permainan, dan AR QR',
-                                      style: TextStyle(color: AppColors.parchment, height: 1.4),
-                                    ),
-                                  ],
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(28),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 26,
+                                    vertical: 16,
+                                  ),
                                 ),
+                                child: const Text('Lihat Produk'),
                               ),
-                            ),
+                            ],
                           ),
+                          if (isMobile) const SizedBox(height: 40),
                         ],
                       ),
                     ),
-                  ),
-                ),
-              ],
-            );
-          },
+
+                    if (!isMobile) const SizedBox(width: 40),
+
+                    // Sisi Rantai: Gambar & Kartu Melayang
+                    Expanded(
+                      flex: isMobile ? 0 : 5,
+                      child: Center(
+                        child: SizedBox(
+                          width: imageWidth + 60,
+                          height: imageHeight + 60,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            clipBehavior: Clip.none,
+                            children: [
+                              HoverFloatCard(
+                                child: Container(
+                                  width: imageWidth,
+                                  height: imageHeight,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.parchment,
+                                    borderRadius: BorderRadius.circular(32),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: AppColors.shadow.withOpacity(
+                                          0.3,
+                                        ),
+                                        blurRadius: 40,
+                                        offset: const Offset(0, 20),
+                                      ),
+                                    ],
+                                  ),
+                                  padding: const EdgeInsets.all(14),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(24),
+                                    child: Image.asset(
+                                      'assets/boardgame_design_3.png',
+                                      fit: BoxFit.cover,
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              Container(
+                                                color: AppColors.antiqueGold,
+                                                child: const Icon(Icons.image),
+                                              ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
@@ -179,30 +297,44 @@ class _DecorativeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 140,
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.shadow,
-            blurRadius: 18,
-            offset: const Offset(0, 14),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(24),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+        child: Container(
+          width: 130,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: color.withOpacity(
+              0.7,
+            ), // Opacity dikurangi agar efek blur terasa
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: Colors.white.withOpacity(0.2)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, color: AppColors.navy, size: 28),
-          const SizedBox(height: 18),
-          Text(
-            label,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: AppColors.navy, fontWeight: FontWeight.w700),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(icon, color: AppColors.navy, size: 24),
+              const SizedBox(height: 12),
+              Text(
+                label,
+                style: const TextStyle(
+                  color: AppColors.navy,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13,
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
