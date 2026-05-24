@@ -16,7 +16,6 @@ void main() {
 class ArsipQuestApp extends StatelessWidget {
   const ArsipQuestApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,6 +45,7 @@ class _LandingPageState extends State<LandingPage> {
     'Cara Bermain': false,
     'Galeri': false,
     'Harga': false,
+    'Flyer': false, // ← TAMBAHAN BARU
     'FAQ': false,
     'Kontak': false,
   };
@@ -58,6 +58,7 @@ class _LandingPageState extends State<LandingPage> {
     'Cara Bermain': GlobalKey(),
     'Galeri': GlobalKey(),
     'Harga': GlobalKey(),
+    'Flyer': GlobalKey(), // ← TAMBAHAN BARU
     'FAQ': GlobalKey(),
     'Kontak': GlobalKey(),
   };
@@ -179,6 +180,14 @@ class _LandingPageState extends State<LandingPage> {
                     visible: _visibleSections['Harga'] ?? false,
                   ),
                 ),
+                // ── TAMBAHAN BARU ──────────────────────────
+                Container(
+                  key: _sectionKeys['Flyer'],
+                  child: FlyerSection(
+                    visible: _visibleSections['Flyer'] ?? false,
+                  ),
+                ),
+                // ───────────────────────────────────────────
                 Container(
                   key: _sectionKeys['FAQ'],
                   child: FaqSection(visible: _visibleSections['FAQ'] ?? false),

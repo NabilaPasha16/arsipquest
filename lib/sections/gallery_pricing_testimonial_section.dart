@@ -407,3 +407,46 @@ class TestimonialSection extends StatelessWidget {
     );
   }
 }
+
+// ── TAMBAHAN BARU ──────────────────────────────────────────
+class FlyerSection extends StatelessWidget {
+  final bool visible;
+
+  const FlyerSection({super.key, required this.visible});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSection(
+      visible: visible,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 40),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SectionTitle(
+              title: 'Kenali Lebih Dekat',
+              subtitle: 'Semua dalam satu kotak',
+              description:
+                  'Board game premium dengan komponen lengkap dan teknologi AR untuk pengalaman sejarah yang tak terlupakan.',
+            ),
+            const SizedBox(height: 28),
+            Center(
+              child: HoverFloatCard(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(24),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 520),
+                    child: Image.asset(
+                      'assets/flyer_arsipquest.png',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
