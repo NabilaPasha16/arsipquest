@@ -1,6 +1,7 @@
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 import 'dart:ui' as ui;
+import 'dart:ui_web' as ui_web;
 
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class YoutubeEmbed extends StatelessWidget {
 
     // Register the IFrame only once per viewId
     // ignore: undefined_prefixed_name
-    ui.platformViewRegistry.registerViewFactory(viewId, (int viewId) {
+    ui_web.platformViewRegistry.registerViewFactory(viewId, (int viewId) {
       final iframe = html.IFrameElement()
         ..width = '100%'
         ..height = '100%'

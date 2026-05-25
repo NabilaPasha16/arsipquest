@@ -1,6 +1,6 @@
 import 'package:arsipquest/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-
+import 'sections/tim_section.dart';
 import 'core/theme/app_theme.dart';
 import 'sections/about_features_section.dart';
 import 'sections/components_howto_section.dart';
@@ -38,6 +38,7 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   final ScrollController _scrollController = ScrollController();
   final Map<String, bool> _visibleSections = {
+    'Tim': false, // di antara 'Harga' dan 'FAQ'
     'Beranda': true,
     'Tentang': false,
     'Keunggulan': false,
@@ -52,6 +53,7 @@ class _LandingPageState extends State<LandingPage> {
   };
 
   final Map<String, GlobalKey> _sectionKeys = {
+    'Tim': GlobalKey(), // di antara 'Harga' dan 'FAQ'
     'Beranda': GlobalKey(),
     'Tentang': GlobalKey(),
     'Keunggulan': GlobalKey(),
@@ -196,6 +198,10 @@ class _LandingPageState extends State<LandingPage> {
                   ),
                 ),
                 // ───────────────────────────────────────────
+                Container(
+                  key: _sectionKeys['Tim'],
+                  child: TimSection(visible: _visibleSections['Tim'] ?? false),
+                ),
                 Container(
                   key: _sectionKeys['FAQ'],
                   child: FaqSection(visible: _visibleSections['FAQ'] ?? false),
