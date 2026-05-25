@@ -45,6 +45,7 @@ class _LandingPageState extends State<LandingPage> {
     'Cara Bermain': false,
     'Galeri': false,
     'Harga': false,
+    'Video': false,
     'Flyer': false, // ← TAMBAHAN BARU
     'FAQ': false,
     'Kontak': false,
@@ -58,6 +59,7 @@ class _LandingPageState extends State<LandingPage> {
     'Cara Bermain': GlobalKey(),
     'Galeri': GlobalKey(),
     'Harga': GlobalKey(),
+    'Video': GlobalKey(),
     'Flyer': GlobalKey(), // ← TAMBAHAN BARU
     'FAQ': GlobalKey(),
     'Kontak': GlobalKey(),
@@ -178,6 +180,12 @@ class _LandingPageState extends State<LandingPage> {
                   key: _sectionKeys['Harga'],
                   child: PricingSection(
                     visible: _visibleSections['Harga'] ?? false,
+                  ),
+                ),
+                Container(
+                  key: _sectionKeys['Video'],
+                  child: VideoSection(
+                    visible: _visibleSections['Video'] ?? false,
                   ),
                 ),
                 // ── TAMBAHAN BARU ──────────────────────────

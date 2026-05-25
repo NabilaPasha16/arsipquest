@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/youtube_embed.dart';
 
 import '../core/constants/app_colors.dart';
 import '../models/app_models.dart';
@@ -440,6 +441,95 @@ class FlyerSection extends StatelessWidget {
                       'assets/flyer_arsipquest.png',
                       fit: BoxFit.contain,
                     ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class VideoSection extends StatelessWidget {
+  final bool visible;
+
+  const VideoSection({super.key, required this.visible});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSection(
+      visible: visible,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 40),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SectionTitle(
+              title: 'Video Promosi',
+              subtitle: 'Lihat keseruan ARSIP QUEST',
+              description:
+                  'Tonton video promosi yang menampilkan gameplay, fitur AR, dan pengalaman bermain yang seru.',
+            ),
+            const SizedBox(height: 28),
+            Center(
+              child: HoverFloatCard(
+                child: Container(
+                  width: double.infinity,
+                  constraints: const BoxConstraints(maxWidth: 720),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [AppColors.navy, AppColors.gold],
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.shadow.withOpacity(0.25),
+                        blurRadius: 30,
+                        offset: const Offset(0, 18),
+                      ),
+                    ],
+                  ),
+                  padding: const EdgeInsets.all(28),
+                  child: Column(
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(24),
+                          child: YoutubeEmbed(videoId: 'qCgkBvJF4KY'),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      Text(
+                        'Video promosi ARSIP QUEST menampilkan cara bermain, visual AR, dan keseruan pengalaman edukasi ini.',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(color: AppColors.parchment),
+                      ),
+                      const SizedBox(height: 24),
+                      ElevatedButton.icon(
+                        onPressed: null,
+                        icon: const Icon(Icons.play_circle_fill),
+                        label: const Text('Putar di sini'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.parchment,
+                          foregroundColor: AppColors.navy,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 28,
+                            vertical: 18,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(28),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

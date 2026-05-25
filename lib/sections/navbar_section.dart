@@ -42,6 +42,7 @@ class NavbarSection extends StatelessWidget {
       'Cara Bermain',
       'Galeri',
       'Harga',
+      'Video',
       'FAQ',
       'Kontak',
     ];
