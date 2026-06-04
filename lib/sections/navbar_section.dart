@@ -15,7 +15,7 @@ class NavbarSection extends StatelessWidget {
   void _openMobileMenu(BuildContext context, List<String> items) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppColors.parchment.withOpacity(0.98),
+      backgroundColor: Theme.of(context).colorScheme.surface.withOpacity(0.98),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
       ),
@@ -47,14 +47,15 @@ class NavbarSection extends StatelessWidget {
       'Kontak',
     ];
 
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       // Dekorasi container utama navbar
       decoration: BoxDecoration(
-        color: AppColors.parchment,
+        color: colorScheme.surface,
         boxShadow: elevated
             ? [
                 BoxShadow(
-                  color: AppColors.shadow.withOpacity(0.1),
+                  color: Theme.of(context).shadowColor.withOpacity(0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -70,9 +71,9 @@ class NavbarSection extends StatelessWidget {
               children: [
                 const _Logo(),
                 IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.menu_rounded,
-                    color: AppColors.navy,
+                    color: colorScheme.primary,
                     size: 28,
                   ),
                   tooltip: 'Menu',
@@ -100,8 +101,8 @@ class NavbarSection extends StatelessWidget {
                             onTap: () => onItemTap(item),
                             child: Text(
                               item,
-                              style: const TextStyle(
-                                color: AppColors.navy,
+                              style: TextStyle(
+                                color: colorScheme.primary,
                                 fontWeight: FontWeight.w600,
                                 letterSpacing: 0.2,
                               ),
@@ -114,6 +115,10 @@ class NavbarSection extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () => onItemTap('Kontak'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: colorScheme.primary,
+                  foregroundColor: colorScheme.onPrimary,
+                ),
                 child: const Text('Dapatkan Sekarang'),
               ),
             ],
@@ -134,11 +139,11 @@ class _Logo extends StatelessWidget {
           width: 64,
           height: 64,
           decoration: BoxDecoration(
-            color: AppColors.parchment,
+            color: Theme.of(context).colorScheme.surfaceVariant,
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: AppColors.shadow,
+                color: Theme.of(context).shadowColor,
                 blurRadius: 18,
                 offset: const Offset(0, 10),
               ),
@@ -151,7 +156,7 @@ class _Logo extends StatelessWidget {
         Text(
           'ARSIP QUEST',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color: AppColors.darkBrown,
+            color: Theme.of(context).textTheme.titleLarge?.color,
             fontWeight: FontWeight.w700,
             letterSpacing: 0.8,
           ),
@@ -169,6 +174,7 @@ class _MobileNavbarMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return SafeArea(
       top: false,
       child: Padding(
@@ -183,12 +189,12 @@ class _MobileNavbarMenu extends StatelessWidget {
                 Text(
                   'Menu',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: AppColors.navy,
+                    color: colorScheme.primary,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.close_rounded, color: AppColors.navy),
+                  icon: Icon(Icons.close_rounded, color: colorScheme.primary),
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ],
@@ -201,7 +207,7 @@ class _MobileNavbarMenu extends StatelessWidget {
                   title: Text(
                     item,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: AppColors.darkBrown,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -213,7 +219,7 @@ class _MobileNavbarMenu extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18),
                   ),
-                  tileColor: AppColors.softStone,
+                  tileColor: Theme.of(context).colorScheme.surfaceVariant,
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 18,
                     vertical: 8,

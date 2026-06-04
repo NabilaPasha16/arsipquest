@@ -13,9 +13,14 @@ void main() {
   runApp(const ArsipQuestApp());
 }
 
-class ArsipQuestApp extends StatelessWidget {
+class ArsipQuestApp extends StatefulWidget {
   const ArsipQuestApp({super.key});
 
+  @override
+  State<ArsipQuestApp> createState() => _ArsipQuestAppState();
+}
+
+class _ArsipQuestAppState extends State<ArsipQuestApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -77,9 +77,9 @@ class ContactSection extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 40),
         decoration: BoxDecoration(
-          color: AppColors.dun.withOpacity(0.28),
+          color: Colors.white.withOpacity(0.08),
           borderRadius: BorderRadius.circular(32),
-          border: Border.all(color: AppColors.gold.withOpacity(0.16)),
+          border: Border.all(color: Colors.black.withOpacity(0.04)),
         ),
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -104,13 +104,13 @@ class ContactSection extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.all(24),
                         decoration: BoxDecoration(
-                          color: AppColors.ivory,
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(28),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.shadow,
-                              blurRadius: 24,
-                              offset: const Offset(0, 14),
+                              color: Colors.black.withOpacity(0.06),
+                              blurRadius: 18,
+                              offset: const Offset(0, 10),
                             ),
                           ],
                         ),
@@ -121,7 +121,11 @@ class ContactSection extends StatelessWidget {
                               'Butuh bantuan cepat?',
                               style: Theme.of(context).textTheme.displaySmall
                                   ?.copyWith(
-                                    color: AppColors.darkBrown,
+                                    color:
+                                        Theme.of(
+                                          context,
+                                        ).textTheme.displaySmall?.color ??
+                                        Theme.of(context).colorScheme.onSurface,
                                     fontWeight: FontWeight.w700,
                                   ),
                             ),
@@ -129,7 +133,11 @@ class ContactSection extends StatelessWidget {
                             Text(
                               'Tim kami siap menjawab pertanyaan tentang paket, fitur, dan cara bermain. Mulai chat sekarang untuk dukungan pemesanan khusus.',
                               style: Theme.of(context).textTheme.bodyLarge
-                                  ?.copyWith(color: AppColors.navy),
+                                  ?.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).textTheme.bodyLarge?.color,
+                                  ),
                             ),
                             const SizedBox(height: 24),
                             ElevatedButton(
@@ -143,8 +151,12 @@ class ContactSection extends StatelessWidget {
                                 );
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.navy,
-                                foregroundColor: AppColors.ivory,
+                                backgroundColor: Theme.of(
+                                  context,
+                                ).colorScheme.primary,
+                                foregroundColor: Theme.of(
+                                  context,
+                                ).colorScheme.onPrimary,
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 28,
                                   vertical: 18,
@@ -238,13 +250,13 @@ class _ContactCard extends StatelessWidget {
           width: 280,
           padding: const EdgeInsets.all(22),
           decoration: BoxDecoration(
-            color: AppColors.ivory,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(26),
-            border: Border.all(color: AppColors.gold.withOpacity(0.16)),
+            border: Border.all(color: Colors.black.withOpacity(0.04)),
             boxShadow: [
               BoxShadow(
-                color: AppColors.shadow,
-                blurRadius: 18,
+                color: Colors.black.withOpacity(0.06),
+                blurRadius: 14,
                 offset: const Offset(0, 10),
               ),
             ],
@@ -255,10 +267,14 @@ class _ContactCard extends StatelessWidget {
                 width: 52,
                 height: 52,
                 decoration: BoxDecoration(
-                  color: AppColors.navy,
+                  color: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Icon(icon, color: AppColors.parchment, size: 26),
+                child: Icon(
+                  icon,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  size: 26,
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -268,24 +284,26 @@ class _ContactCard extends StatelessWidget {
                     Text(
                       title,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: AppColors.darkBrown,
+                        color:
+                            Theme.of(context).textTheme.titleMedium?.color ??
+                            Theme.of(context).colorScheme.onSurface,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                     const SizedBox(height: 6),
                     Text(
                       value,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium?.copyWith(color: AppColors.navy),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).textTheme.bodyMedium?.color,
+                      ),
                     ),
                   ],
                 ),
               ),
-              const Icon(
+              Icon(
                 Icons.arrow_forward_ios_rounded,
                 size: 16,
-                color: AppColors.navy,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ],
           ),
@@ -364,7 +382,7 @@ class FooterSection extends StatelessWidget {
                           'Produk',
                           style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(
-                                color: AppColors.parchment,
+                                color: Theme.of(context).colorScheme.onPrimary,
                                 fontWeight: FontWeight.w700,
                               ),
                         ),
@@ -398,7 +416,7 @@ class FooterSection extends StatelessWidget {
                           'Keamanan & Privasi',
                           style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(
-                                color: AppColors.parchment,
+                                color: Theme.of(context).colorScheme.onPrimary,
                                 fontWeight: FontWeight.w700,
                               ),
                         ),
@@ -428,7 +446,7 @@ class FooterSection extends StatelessWidget {
                           'Ikuti Kami',
                           style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(
-                                color: AppColors.parchment,
+                                color: Theme.of(context).colorScheme.onPrimary,
                                 fontWeight: FontWeight.w700,
                               ),
                         ),
@@ -464,7 +482,7 @@ class FooterSection extends StatelessWidget {
           const SizedBox(height: 32),
 
           // Divider
-          Container(height: 1, color: AppColors.softStone.withOpacity(0.3)),
+          Container(height: 1, color: Theme.of(context).dividerColor),
 
           const SizedBox(height: 20),
 
@@ -475,9 +493,9 @@ class FooterSection extends StatelessWidget {
             children: [
               Text(
                 '© 2026 ARSIP QUEST. All rights reserved.',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodySmall?.copyWith(color: AppColors.softStone),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
               ),
               if (!isMobile)
                 Row(
@@ -520,7 +538,7 @@ class _FooterLink extends StatelessWidget {
           child: Text(
             label,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: AppColors.softStone,
+              color: Theme.of(context).colorScheme.onPrimary,
               decoration: TextDecoration.none,
             ),
           ),
@@ -561,11 +579,19 @@ class _SocialMediaIcon extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: AppColors.softStone.withOpacity(0.2),
+              color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.12),
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: AppColors.softStone.withOpacity(0.1)),
+              border: Border.all(
+                color: Theme.of(
+                  context,
+                ).colorScheme.onPrimary.withOpacity(0.08),
+              ),
             ),
-            child: Icon(icon, color: AppColors.parchment, size: 18),
+            child: Icon(
+              icon,
+              color: Theme.of(context).colorScheme.onPrimary,
+              size: 18,
+            ),
           ),
         ),
       ),
@@ -582,9 +608,9 @@ class _SimpleFooterLink extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       label,
-      style: Theme.of(
-        context,
-      ).textTheme.bodySmall?.copyWith(color: AppColors.softStone),
+      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+        color: Theme.of(context).colorScheme.onPrimary,
+      ),
     );
   }
 }

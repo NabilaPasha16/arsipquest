@@ -43,7 +43,11 @@ class AboutSection extends StatelessWidget {
                       Text(
                         'Setiap permainan mengajak pemain menelusuri situs bersejarah Nusantara, mengungkap arsip tersembunyi, dan menghadapi tantangan strategi yang membuat proses belajar terasa hidup, visual, dan penuh eksplorasi.',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: AppColors.darkBrown.withOpacity(0.8),
+                          color:
+                              Theme.of(
+                                context,
+                              ).textTheme.bodyLarge?.color?.withOpacity(0.8) ??
+                              Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ],
@@ -60,10 +64,12 @@ class AboutSection extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
-                      color: AppColors.navy,
+                      color: Theme.of(context).colorScheme.primary,
                       borderRadius: BorderRadius.circular(30),
                       border: Border.all(
-                        color: AppColors.gold.withOpacity(0.18),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.secondary.withOpacity(0.18),
                       ),
                     ),
                     child: Column(
@@ -74,7 +80,7 @@ class AboutSection extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(
                                 fontWeight: FontWeight.w700,
-                                color: AppColors.parchment,
+                                color: Theme.of(context).colorScheme.onPrimary,
                               ),
                         ),
                         const SizedBox(height: 12),
@@ -83,7 +89,9 @@ class AboutSection extends StatelessWidget {
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium
                               ?.copyWith(
-                                color: AppColors.parchment.withOpacity(0.9),
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onPrimary.withOpacity(0.9),
                               ),
                         ),
                       ],

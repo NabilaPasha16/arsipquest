@@ -18,17 +18,21 @@ class SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+    final bodyColor =
+        textTheme.bodyLarge?.color ?? Theme.of(context).colorScheme.onSurface;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
-          style: textTheme.headlineMedium?.copyWith(color: AppColors.navy),
+          style: textTheme.headlineMedium?.copyWith(color: colorScheme.primary),
         ),
         const SizedBox(height: 10),
         Text(
           subtitle,
-          style: textTheme.titleLarge?.copyWith(color: AppColors.accentRed),
+          style: textTheme.titleLarge?.copyWith(color: colorScheme.secondary),
         ),
         const SizedBox(height: 14),
         ConstrainedBox(
@@ -36,7 +40,7 @@ class SectionTitle extends StatelessWidget {
           child: Text(
             description,
             style: textTheme.bodyLarge?.copyWith(
-              color: AppColors.darkBrown.withOpacity(0.88),
+              color: bodyColor.withOpacity(0.88),
             ),
           ),
         ),
@@ -90,19 +94,23 @@ class FeatureCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
-        color: AppColors.navy,
+        color: colorScheme.primary,
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: AppColors.shadow,
+            color: Theme.of(context).shadowColor,
             blurRadius: 28,
             offset: const Offset(0, 18),
           ),
         ],
-        border: Border.all(color: AppColors.gold.withOpacity(0.18), width: 1),
+        border: Border.all(
+          color: colorScheme.primary.withOpacity(0.18),
+          width: 1,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,30 +119,30 @@ class FeatureCard extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: AppColors.gold,
+              color: colorScheme.secondary,
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.shadow,
+                  color: Theme.of(context).shadowColor,
                   blurRadius: 8,
                   offset: const Offset(0, 6),
                 ),
               ],
             ),
-            child: Icon(icon, color: AppColors.navy, size: 30),
+            child: Icon(icon, color: colorScheme.onPrimary, size: 30),
           ),
           const SizedBox(height: 18),
           Text(
             title,
             style: Theme.of(
               context,
-            ).textTheme.titleLarge?.copyWith(color: AppColors.parchment),
+            ).textTheme.titleLarge?.copyWith(color: colorScheme.onPrimary),
           ),
           const SizedBox(height: 10),
           Text(
             subtitle,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: AppColors.parchment.withOpacity(0.9),
+              color: colorScheme.onPrimary.withOpacity(0.9),
             ),
           ),
         ],
@@ -165,24 +173,25 @@ class PriceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final cardColor = featured
-        ? AppColors.gold.withOpacity(0.12)
-        : AppColors.parchment;
+        ? colorScheme.secondary.withOpacity(0.12)
+        : Theme.of(context).cardColor;
     final borderColor = featured
-        ? AppColors.gold
-        : AppColors.gold.withOpacity(0.18);
-    final priceColor = featured ? AppColors.darkBrown : AppColors.accentRed;
+        ? colorScheme.secondary
+        : colorScheme.secondary.withOpacity(0.18);
+    final priceColor = featured ? colorScheme.primary : colorScheme.secondary;
     final badge = featured
         ? Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             decoration: BoxDecoration(
-              color: AppColors.accentRed,
+              color: colorScheme.secondary,
               borderRadius: BorderRadius.circular(18),
             ),
-            child: const Text(
+            child: Text(
               'Paling Popular',
               style: TextStyle(
-                color: AppColors.parchment,
+                color: colorScheme.onSecondary,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -198,7 +207,7 @@ class PriceCard extends StatelessWidget {
         border: Border.all(color: borderColor),
         boxShadow: [
           BoxShadow(
-            color: AppColors.shadow,
+            color: Theme.of(context).shadowColor,
             blurRadius: 28,
             offset: const Offset(0, 18),
           ),
@@ -211,7 +220,7 @@ class PriceCard extends StatelessWidget {
           Text(
             title,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: AppColors.darkBrown,
+              color: Theme.of(context).textTheme.bodyLarge?.color,
               fontWeight: FontWeight.w800,
             ),
           ),
@@ -219,7 +228,9 @@ class PriceCard extends StatelessWidget {
           Text(
             subtitle,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: AppColors.darkBrown.withOpacity(0.82),
+              color: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.color?.withOpacity(0.82),
             ),
           ),
           const SizedBox(height: 18),
@@ -243,14 +254,16 @@ class PriceCard extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 8, right: 12),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: AppColors.navy,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   Expanded(
                     child: Text(
                       item,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.navy.withOpacity(0.85),
+                        color: Theme.of(
+                          context,
+                        ).textTheme.bodyLarge?.color?.withOpacity(0.85),
                       ),
                     ),
                   ),
@@ -268,9 +281,9 @@ class PriceCard extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: featured
-                    ? AppColors.accentRed
-                    : AppColors.navy,
-                foregroundColor: AppColors.parchment,
+                    ? colorScheme.secondary
+                    : colorScheme.primary,
+                foregroundColor: colorScheme.onPrimary,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -298,14 +311,18 @@ class FaqTile extends StatelessWidget {
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        collapsedBackgroundColor: AppColors.softStone,
-        backgroundColor: AppColors.softStone,
+        collapsedBackgroundColor:
+            Theme.of(context).colorScheme.surfaceVariant ??
+            Theme.of(context).cardColor,
+        backgroundColor:
+            Theme.of(context).colorScheme.surfaceVariant ??
+            Theme.of(context).cardColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Text(
           question,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
             fontWeight: FontWeight.w700,
-            color: AppColors.darkBrown,
+            color: Theme.of(context).textTheme.bodyLarge?.color,
           ),
         ),
         childrenPadding: const EdgeInsets.symmetric(
@@ -316,7 +333,9 @@ class FaqTile extends StatelessWidget {
           Text(
             answer,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: AppColors.navy.withOpacity(0.9),
+              color: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.color?.withOpacity(0.9),
             ),
           ),
         ],

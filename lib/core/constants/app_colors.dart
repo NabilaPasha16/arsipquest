@@ -26,5 +26,12 @@ class AppColors {
   static const Color navy = mediumBrown;
   static const Color accentRed = lightBrown;
 
-  static const Color shadow = Color(0x33000000);
+  static const Color shadow = Color.fromARGB(9, 88, 87, 87);
+
+  // Dark theme colors
+  static const Color darkBackground = Color.fromARGB(255, 31, 31, 36);
+  static const Color darkSurface = Color(0xFF121316);
+  static const Color darkCard = Color(0xFF1B1B1D);
+  static const Color darkText = Color(0xFFECECEC);
+  static const Color darkAccent = lightBrown;
 }

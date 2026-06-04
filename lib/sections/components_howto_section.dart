@@ -51,10 +51,12 @@ class ComponentsSection extends StatelessWidget {
                             width: cardWidth,
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: AppColors.softStone,
+                              color: Theme.of(context).cardColor,
                               borderRadius: BorderRadius.circular(26),
                               border: Border.all(
-                                color: AppColors.gold.withOpacity(0.16),
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.secondary.withOpacity(0.16),
                               ),
                             ),
                             child: Row(
@@ -62,12 +64,16 @@ class ComponentsSection extends StatelessWidget {
                                 Container(
                                   padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
-                                    color: AppColors.navy,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
                                     borderRadius: BorderRadius.circular(18),
                                   ),
                                   child: Icon(
                                     item.icon,
-                                    color: AppColors.parchment,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimary,
                                     size: 24,
                                   ),
                                 ),
@@ -77,7 +83,13 @@ class ComponentsSection extends StatelessWidget {
                                     item.title,
                                     style: Theme.of(context).textTheme.bodyLarge
                                         ?.copyWith(
-                                          color: AppColors.darkBrown,
+                                          color:
+                                              Theme.of(
+                                                context,
+                                              ).textTheme.bodyLarge?.color ??
+                                              Theme.of(
+                                                context,
+                                              ).colorScheme.onSurface,
                                           fontWeight: FontWeight.w700,
                                         ),
                                   ),
@@ -152,17 +164,21 @@ class HowToPlaySection extends StatelessWidget {
                         width: cardWidth,
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: AppColors.parchment,
+                          color:
+                              Theme.of(context).colorScheme.surfaceVariant ??
+                              Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.shadow,
+                              color: Theme.of(context).shadowColor,
                               blurRadius: 18,
                               offset: const Offset(0, 12),
                             ),
                           ],
                           border: Border.all(
-                            color: AppColors.gold.withOpacity(0.12),
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.secondary.withOpacity(0.12),
                           ),
                         ),
                         child: Column(
@@ -184,14 +200,18 @@ class HowToPlaySection extends StatelessWidget {
                                   width: 46,
                                   height: 46,
                                   decoration: BoxDecoration(
-                                    color: AppColors.navy,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: Center(
                                     child: Text(
                                       item.step,
-                                      style: const TextStyle(
-                                        color: AppColors.parchment,
+                                      style: TextStyle(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.onPrimary,
                                         fontWeight: FontWeight.w800,
                                       ),
                                     ),
@@ -204,7 +224,15 @@ class HowToPlaySection extends StatelessWidget {
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleMedium
-                                        ?.copyWith(color: AppColors.darkBrown),
+                                        ?.copyWith(
+                                          color:
+                                              Theme.of(
+                                                context,
+                                              ).textTheme.titleMedium?.color ??
+                                              Theme.of(
+                                                context,
+                                              ).colorScheme.onSurface,
+                                        ),
                                   ),
                                 ),
                               ],

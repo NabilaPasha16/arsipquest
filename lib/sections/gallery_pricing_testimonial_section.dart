@@ -81,11 +81,11 @@ class _GallerySectionState extends State<GallerySection> {
                     child: HoverFloatCard(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: AppColors.parchment,
+                          color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(24),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.shadow,
+                              color: Theme.of(context).shadowColor,
                               blurRadius: 26,
                               offset: const Offset(0, 16),
                             ),
@@ -113,7 +113,11 @@ class _GallerySectionState extends State<GallerySection> {
                                 vertical: 18,
                               ),
                               decoration: BoxDecoration(
-                                color: AppColors.softStone,
+                                color:
+                                    Theme.of(
+                                      context,
+                                    ).colorScheme.surfaceVariant ??
+                                    Theme.of(context).cardColor,
                                 borderRadius: const BorderRadius.only(
                                   bottomLeft: Radius.circular(24),
                                   bottomRight: Radius.circular(24),
@@ -128,7 +132,13 @@ class _GallerySectionState extends State<GallerySection> {
                                         .textTheme
                                         .titleMedium
                                         ?.copyWith(
-                                          color: AppColors.darkBrown,
+                                          color:
+                                              Theme.of(
+                                                context,
+                                              ).textTheme.titleMedium?.color ??
+                                              Theme.of(
+                                                context,
+                                              ).colorScheme.onSurface,
                                           fontWeight: FontWeight.w800,
                                         ),
                                   ),
@@ -164,8 +174,10 @@ class _GallerySectionState extends State<GallerySection> {
                   height: 10,
                   decoration: BoxDecoration(
                     color: _activePage == index
-                        ? AppColors.gold
-                        : AppColors.richBronzeGold.withOpacity(0.3),
+                        ? Theme.of(context).colorScheme.secondary
+                        : Theme.of(
+                            context,
+                          ).colorScheme.primary.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
@@ -317,19 +329,23 @@ class TestimonialSection extends StatelessWidget {
                             child: Container(
                               padding: const EdgeInsets.all(22),
                               decoration: BoxDecoration(
-                                color: AppColors.lightGold,
+                                color:
+                                    Theme.of(
+                                      context,
+                                    ).colorScheme.surfaceVariant ??
+                                    Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.circular(28),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: AppColors.shadow,
+                                    color: Theme.of(context).shadowColor,
                                     blurRadius: 24,
                                     offset: const Offset(0, 16),
                                   ),
                                 ],
                                 border: Border.all(
-                                  color: AppColors.antiqueGold.withOpacity(
-                                    0.18,
-                                  ),
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary.withOpacity(0.18),
                                 ),
                               ),
                               child: Column(
@@ -339,14 +355,18 @@ class TestimonialSection extends StatelessWidget {
                                     children: [
                                       CircleAvatar(
                                         radius: 25,
-                                        backgroundColor: AppColors.gold,
+                                        backgroundColor: Theme.of(
+                                          context,
+                                        ).colorScheme.secondary,
                                         child: Text(
                                           testimonial.name[0],
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleMedium
                                               ?.copyWith(
-                                                color: AppColors.richBronzeGold,
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.onSecondary,
                                                 fontWeight: FontWeight.w800,
                                               ),
                                         ),
@@ -364,7 +384,14 @@ class TestimonialSection extends StatelessWidget {
                                                   .titleMedium
                                                   ?.copyWith(
                                                     fontWeight: FontWeight.w800,
-                                                    color: AppColors.darkBrown,
+                                                    color:
+                                                        Theme.of(context)
+                                                            .textTheme
+                                                            .titleMedium
+                                                            ?.color ??
+                                                        Theme.of(
+                                                          context,
+                                                        ).colorScheme.onSurface,
                                                   ),
                                             ),
                                             const SizedBox(height: 6),
@@ -374,8 +401,10 @@ class TestimonialSection extends StatelessWidget {
                                                   .textTheme
                                                   .bodyMedium
                                                   ?.copyWith(
-                                                    color: AppColors
-                                                        .richBronzeGold,
+                                                    color: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyMedium
+                                                        ?.color,
                                                   ),
                                             ),
                                           ],
@@ -388,8 +417,11 @@ class TestimonialSection extends StatelessWidget {
                                     testimonial.message,
                                     style: Theme.of(context).textTheme.bodyLarge
                                         ?.copyWith(
-                                          color: AppColors.darkBrown
-                                              .withOpacity(0.95),
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge
+                                              ?.color
+                                              ?.withOpacity(0.95),
                                         ),
                                   ),
                                 ],
@@ -480,14 +512,17 @@ class VideoSection extends StatelessWidget {
                   constraints: const BoxConstraints(maxWidth: 720),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(32),
-                    gradient: const LinearGradient(
+                    gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [AppColors.navy, AppColors.gold],
+                      colors: [
+                        Theme.of(context).colorScheme.primary,
+                        Theme.of(context).colorScheme.secondary,
+                      ],
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.shadow.withOpacity(0.25),
+                        color: Theme.of(context).shadowColor.withOpacity(0.25),
                         blurRadius: 30,
                         offset: const Offset(0, 18),
                       ),
@@ -507,10 +542,9 @@ class VideoSection extends StatelessWidget {
                       Text(
                         'Video promosi ARSIP QUEST menampilkan cara bermain, visual AR, dan keseruan pengalaman edukasi ini.',
                         textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge
-                            ?.copyWith(color: AppColors.parchment),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
                       ),
                       const SizedBox(height: 24),
                       ElevatedButton.icon(
@@ -518,8 +552,12 @@ class VideoSection extends StatelessWidget {
                         icon: const Icon(Icons.play_circle_fill),
                         label: const Text('Putar di sini'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.parchment,
-                          foregroundColor: AppColors.navy,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.onPrimary,
+                          foregroundColor: Theme.of(
+                            context,
+                          ).colorScheme.primary,
                           padding: const EdgeInsets.symmetric(
                             horizontal: 28,
                             vertical: 18,
