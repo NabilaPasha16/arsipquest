@@ -546,27 +546,6 @@ class VideoSection extends StatelessWidget {
                           color: Theme.of(context).colorScheme.onPrimary,
                         ),
                       ),
-                      const SizedBox(height: 24),
-                      ElevatedButton.icon(
-                        onPressed: null,
-                        icon: const Icon(Icons.play_circle_fill),
-                        label: const Text('Putar di sini'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(
-                            context,
-                          ).colorScheme.onPrimary,
-                          foregroundColor: Theme.of(
-                            context,
-                          ).colorScheme.primary,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 28,
-                            vertical: 18,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(28),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),

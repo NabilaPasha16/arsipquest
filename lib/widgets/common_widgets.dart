@@ -175,17 +175,17 @@ class PriceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final cardColor = featured
-        ? colorScheme.secondary.withOpacity(0.12)
+        ? AppColors.lightBrown.withOpacity(0.18)
         : Theme.of(context).cardColor;
     final borderColor = featured
-        ? colorScheme.secondary
+        ? AppColors.mediumBrown.withOpacity(0.35)
         : colorScheme.secondary.withOpacity(0.18);
-    final priceColor = featured ? colorScheme.primary : colorScheme.secondary;
+    final priceColor = featured ? AppColors.darkBrown : colorScheme.secondary;
     final badge = featured
         ? Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             decoration: BoxDecoration(
-              color: colorScheme.secondary,
+              color: AppColors.mediumBrown,
               borderRadius: BorderRadius.circular(18),
             ),
             child: Text(
