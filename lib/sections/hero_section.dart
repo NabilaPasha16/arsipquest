@@ -73,35 +73,8 @@ class HeroSection extends StatelessWidget {
               ),
             ),
 
-            // Badge Petualangan (Muncul di Desktop/Tablet)
-            Positioned(
-              left: 32,
-              bottom: 36,
-              child: LayoutBuilder(
-                builder: (context, c) => c.maxWidth < 600
-                    ? const SizedBox.shrink()
-                    : Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          color: AppColors.lightGold.withOpacity(0.95),
-                          borderRadius: BorderRadius.circular(28),
-                          border: Border.all(
-                            color: AppColors.gold.withOpacity(0.3),
-                          ),
-                        ),
-                        child: const Text(
-                          'Petualangan Sejarah • Bermain, Menjelajah, Mengungkap',
-                          style: TextStyle(
-                            color: AppColors.darkBrown,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-              ),
-            ),
+            // NOTE: Badge moved into the image column below so it won't overlap
+            // the image or other content. See insertion near the image widget.
 
             // --- Konten Utama ---
             LayoutBuilder(
@@ -228,43 +201,84 @@ class HeroSection extends StatelessWidget {
                     Expanded(
                       flex: isMobile ? 0 : 5,
                       child: Center(
-                        child: SizedBox(
-                          width: imageWidth + 60,
-                          height: imageHeight + 60,
-                          child: Stack(
-                            alignment: Alignment.center,
-                            clipBehavior: Clip.none,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: imageWidth + 60,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              HoverFloatCard(
-                                child: Container(
-                                  width: imageWidth,
-                                  height: imageHeight,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.parchment,
-                                    borderRadius: BorderRadius.circular(32),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: AppColors.shadow.withOpacity(
-                                          0.3,
+                              SizedBox(
+                                width: imageWidth + 60,
+                                height: imageHeight + 60,
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    HoverFloatCard(
+                                      child: Container(
+                                        width: imageWidth,
+                                        height: imageHeight,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.parchment,
+                                          borderRadius: BorderRadius.circular(
+                                            32,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: AppColors.shadow
+                                                  .withOpacity(0.3),
+                                              blurRadius: 40,
+                                              offset: const Offset(0, 20),
+                                            ),
+                                          ],
                                         ),
-                                        blurRadius: 40,
-                                        offset: const Offset(0, 20),
+                                        padding: const EdgeInsets.all(14),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                            24,
+                                          ),
+                                          child: Image.asset(
+                                            'assets/boardgame_design_3.png',
+                                            fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) =>
+                                                    Container(
+                                                      color:
+                                                          AppColors.antiqueGold,
+                                                      child: const Icon(
+                                                        Icons.image,
+                                                      ),
+                                                    ),
+                                          ),
+                                        ),
                                       ),
-                                    ],
-                                  ),
-                                  padding: const EdgeInsets.all(14),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(24),
-                                    child: Image.asset(
-                                      'assets/boardgame_design_3.png',
-                                      fit: BoxFit.cover,
-                                      errorBuilder:
-                                          (context, error, stackTrace) =>
-                                              Container(
-                                                color: AppColors.antiqueGold,
-                                                child: const Icon(Icons.image),
-                                              ),
                                     ),
+                                  ],
+                                ),
+                              ),
+
+                              const SizedBox(height: 12),
+
+                              // Caption moved below the image so it doesn't overlap.
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 8,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppColors.lightGold.withOpacity(0.95),
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                    color: AppColors.gold.withOpacity(0.3),
+                                  ),
+                                ),
+                                child: Text(
+                                  'Petualangan Sejarah • Bermain, Menjelajah, Mengungkap',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    color: AppColors.darkBrown,
+                                    fontWeight: FontWeight.w700,
                                   ),
                                 ),
                               ),

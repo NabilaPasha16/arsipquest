@@ -13,19 +13,26 @@ class NavbarSection extends StatelessWidget {
   });
 
   void _openMobileMenu(BuildContext context, List<String> items) {
-    showModalBottomSheet(
+    showDialog(
       context: context,
-      backgroundColor: Theme.of(context).colorScheme.surface.withOpacity(0.98),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
-      ),
+      barrierDismissible: true,
       builder: (context) {
-        return _MobileNavbarMenu(
-          items: items,
-          onItemTap: (item) {
-            Navigator.of(context).pop();
-            onItemTap(item);
-          },
+        return Dialog(
+          alignment: Alignment.topCenter,
+          insetPadding: const EdgeInsets.only(top: 0),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(26)),
+          ),
+          backgroundColor: Theme.of(
+            context,
+          ).colorScheme.surface.withOpacity(0.98),
+          child: _MobileNavbarMenu(
+            items: items,
+            onItemTap: (item) {
+              Navigator.of(context).pop();
+              onItemTap(item);
+            },
+          ),
         );
       },
     );
@@ -175,10 +182,15 @@ class _MobileNavbarMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return SafeArea(
-      top: false,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+      top: true,
+      bottom: false,
+      child: Container(
+        width: screenWidth,
+        constraints: const BoxConstraints(maxWidth: 500),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,10 +211,10 @@ class _MobileNavbarMenu extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
             ...items.map(
               (item) => Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 6.0),
                 child: ListTile(
                   title: Text(
                     item,
@@ -227,7 +239,7 @@ class _MobileNavbarMenu extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 18),
+            const SizedBox(height: 8),
           ],
         ),
       ),
